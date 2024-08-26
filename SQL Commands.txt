@@ -1,0 +1,38 @@
+Title STUDENTS
+
+CREATE TABLE students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    grade_level INT
+);
+
+CREATE TABLE buildings (
+    building_id INT AUTO_INCREMENT PRIMARY KEY,
+    building_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE tracks (
+    track_id INT AUTO_INCREMENT PRIMARY KEY,
+    track_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE offenses (
+    offense_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT,
+    building_id INT,
+    track_id INT,
+    offense_description TEXT,
+    community_service_done BOOLEAN DEFAULT FALSE,
+    expelled BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50),
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (building_id) REFERENCES buildings(building_id),
+    FOREIGN KEY (track_id) REFERENCES tracks(track_id)
+);
+
+ALTER TABLE students
+ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE students
+ADD COLUMN track VARCHAR(100);
